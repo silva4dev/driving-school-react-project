@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { breakAt, BreakpointSize } from "../utils/Breakpoints";
 
 const Root = styled.div`
   color: #fff;
@@ -37,14 +38,14 @@ const Content = styled.div`
 `;
 
 const Container = styled.div`
-  background-color: red;
   width: 100%;
   padding: 0 8px;
-  @media (min-width: 768px) {
+  ${breakAt(BreakpointSize.sm)} {
     padding: 0 16px;
   }
-  @media (min-width: 1200px) {
+  ${breakAt(BreakpointSize.lg)} {
     width: 1140px;
+    padding: 0;
     margin: 0 auto;
   }
 `;
