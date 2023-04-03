@@ -1,6 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import { breakAt, BreakpointSize } from "../utils/Breakpoints";
+
+const colorYellow = "#ffc107";
 
 const Root = styled.div`
   color: #fff;
@@ -11,11 +14,6 @@ const Root = styled.div`
     background-position: center;
     background-blend-mode: overlay;
   `}
-`;
-
-const Title = styled.h1`
-  font-weight: 700;
-  letter-spacing: 2px;
 `;
 
 const Content = styled.div`
@@ -33,6 +31,7 @@ const Content = styled.div`
   li {
     &::before {
       content: "\\2713\\0020";
+      color: ${colorYellow};
     }
   }
 `;
@@ -50,13 +49,17 @@ const Container = styled.div`
   }
 `;
 
-const Hero = ({ image, title, children }) => (
+const Hero = ({ image, children }) => (
   <Root image={image}>
     <Container>
-      <Title>{title}</Title>
       <Content>{children}</Content>
     </Container>
   </Root>
 );
+
+Hero.propTypes = {
+  image: PropTypes.string,
+  children: PropTypes.node,
+};
 
 export default Hero;
