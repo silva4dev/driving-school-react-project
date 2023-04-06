@@ -21,6 +21,7 @@ const Heading = styled.div`
       width: 70px;
     }
   }
+
   h1 {
     padding-bottom: 25px;
   }

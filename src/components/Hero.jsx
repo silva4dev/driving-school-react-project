@@ -39,9 +39,11 @@ const Content = styled.div`
 const Container = styled.div`
   width: 100%;
   padding: 0 8px;
+
   ${breakAt(BreakpointSizes.sm)} {
     padding: 0 16px;
   }
+
   ${breakAt(BreakpointSizes.lg)} {
     width: 1140px;
     padding: 0;
@@ -50,7 +52,7 @@ const Container = styled.div`
 `;
 
 const Hero = ({ image, children }) => (
-  <Root image={image}>
+  <Root image={image} data-testid="hero">
     <Container>
       <Content>{children}</Content>
     </Container>
