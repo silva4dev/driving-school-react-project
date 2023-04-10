@@ -8,8 +8,6 @@ const ButtonColors = {
   danger: "danger",
 };
 
-const getColorText = (props) => props.theme.colors.primary.text;
-
 const getMainColor = ({ theme, color }) => {
   switch (color) {
     case ButtonColors.primary:
@@ -21,6 +19,19 @@ const getMainColor = ({ theme, color }) => {
   }
 };
 
+const getDarkColor = ({ theme, color }) => {
+  switch (color) {
+    case ButtonColors.primary:
+      return theme.colors.primary.dark;
+    case ButtonColors.danger:
+      return theme.colors.danger.dark;
+    default:
+      return "#5a6268";
+  }
+};
+
+const getColorText = (props) => props.theme.colors.primary.text;
+
 const Button = styled.button`
   font-size: 1rem;
   font-weight: 600;
@@ -30,6 +41,16 @@ const Button = styled.button`
   background-color: ${getMainColor};
   border: 2px solid ${getMainColor};
   color: ${getColorText};
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:hover:enabled {
+    background-color: ${getDarkColor};
+    border-color: ${getDarkColor};
+  }
 `;
 
 const ButtonWrapper = (props) => <Button {...props} />;
