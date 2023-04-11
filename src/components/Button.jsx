@@ -46,6 +46,13 @@ const getOutlinedText = (props) => {
   return getMainColor(props);
 };
 
+const getLinkText = (props) => {
+  if (props.color === ButtonColors.default) {
+    return "#757575";
+  }
+  return getMainColor(props);
+};
+
 const Button = styled.button`
   font-size: 1rem;
   font-weight: 600;
@@ -77,10 +84,26 @@ const ButtonOutlined = styled(Button)`
   }
 `;
 
+const ButtonLink = styled(Button)`
+  background-color: transparent;
+  border-color: transparent;
+  color: ${getLinkText};
+  padding-left: 0;
+  padding-right: 0;
+
+  &:hover:enabled {
+    background-color: transparent;
+    border-color: transparent;
+    color: ${getDarkColor};
+  }
+`;
+
 const ButtonWrapper = (props) => {
   switch (props.variant) {
     case ButtonsVariants.outlined:
       return <ButtonOutlined {...props} />;
+    case ButtonsVariants.link:
+      return <ButtonLink {...props} />;
     default:
       return <Button {...props} />;
   }
