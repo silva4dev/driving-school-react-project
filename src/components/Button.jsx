@@ -8,6 +8,12 @@ const ButtonColors = {
   danger: "danger",
 };
 
+const ButtonsVariants = {
+  default: "default",
+  outlined: "outlined",
+  link: "link",
+};
+
 const getMainColor = ({ theme, color }) => {
   switch (color) {
     case ButtonColors.primary:
@@ -32,6 +38,14 @@ const getDarkColor = ({ theme, color }) => {
 
 const getColorText = (props) => props.theme.colors.primary.text;
 
+const getOutlinedText = (props) => {
+  if (props.color === ButtonColors.default) {
+    return "#212121";
+  }
+
+  return getMainColor(props);
+};
+
 const Button = styled.button`
   font-size: 1rem;
   font-weight: 600;
@@ -53,18 +67,37 @@ const Button = styled.button`
   }
 `;
 
-const ButtonWrapper = (props) => <Button {...props} />;
+const ButtonOutlined = styled(Button)`
+  background-color: transparent;
+  color: ${getOutlinedText};
 
-Button.defaultProps = {
+  &:hover:enabled {
+    background-color: transparent;
+    color: ${getDarkColor};
+  }
+`;
+
+const ButtonWrapper = (props) => {
+  switch (props.variant) {
+    case ButtonsVariants.outlined:
+      return <ButtonOutlined {...props} />;
+    default:
+      return <Button {...props} />;
+  }
+};
+
+ButtonWrapper.defaultProps = {
   type: "button",
   children: undefined,
   color: "default",
+  variant: "default",
 };
 
-Button.propTypes = {
+ButtonWrapper.propTypes = {
   type: PropTypes.string,
   children: PropTypes.node,
   color: PropTypes.oneOf(Object.values(ButtonColors)),
+  variant: PropTypes.oneOf(Object.values(ButtonsVariants)),
 };
 
 export default ButtonWrapper;
